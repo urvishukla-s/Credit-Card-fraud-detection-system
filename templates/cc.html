@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Credit Card Fraud Detection Web App</title>
+	<!-- <link rel="stylesheet" type="text/css" href="../static/css/styles.css"> -->
+	<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}" /> </head>
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Poppins', sans-serif;
+}
+
+.header {
+	min-height: 100vh;
+	width: 100%;
+	background-color: #f6f6f6;
+	background-image: linear-gradient(315deg, #f6f6f6 0%, #e9e9e9 74%);
+	color: #000;
+	position: relative;
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+	z-index: 1;
+}
+
+.logo {
+	text-decoration: none;
+	color: #000;
+	font-size: 30px;
+	font-weight: bold;
+	padding-top: 10px;
+	padding-left: 10%;
+}
+
+.nav-links {
+	text-align: right;
+	background: #232526;
+	/* fallback for old browsers */
+	background: -webkit-linear-gradient(to bottom, #414345, #232526);
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to bottom, #414345, #232526);
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	padding: 10px 30px;
+	border-bottom-left-radius: 18px;
+}
+
+.nav-links ul li {
+	list-style: none;
+	display: inline-block;
+	padding: 10px 25px;
+}
+
+.nav-links ul li a {
+	color: #fff;
+	text-decoration: none;
+	font-size: 18px;
+}
+
+.left-sidebar {
+	width: 20%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: #4285F4;
+}
+
+.row {
+	padding: 0 10%;
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	position: relative;
+	margin-top: 5%;
+}
+
+.left-col {
+	flex-basis: 40%;
+}
+
+.right-col {
+	flex-basis: 55%;
+}
+
+.left-col img {
+	width: 80%;
+	cursor: pointer;
+	filter: grayscale(0);
+	transition: filter 1s;
+}
+
+.left-col img:hover {
+	filter: grayscale(1);
+}
+
+.right-col h1 {
+	font-style: 55px;
+	font-weight: 600;
+}
+
+.right-col p {
+	color: #000;
+	margin: 20px 0 70px;
+}
+
+.social-media {
+	display: flex;
+	margin-top: 30px;
+}
+
+.icon {
+	width: 100px;
+	height: 100px;
+	background: #555;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.icon i {
+	width: 28px;
+}
+
+.icon a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #4285F4;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: 0.5s;
+}
+
+.icon a:hover {
+	opacity: 1;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=B612+Mono&display=swap');
+.card {
+	width: 400px;
+	height: 200px;
+	background: rgba( 255, 255, 255, 0.25);
+	box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
+	backdrop-filter: blur( 7.5px);
+	-webkit-backdrop-filter: blur( 7.5px);
+	border-radius: 10px;
+	border: 1px solid rgba( 255, 255, 255, 0.18);
+}
+
+.chip {
+	padding-top: 15px;
+	padding-left: 8px;
+}
+
+.logo {
+	padding-top: 5px;
+	margin: 5px;
+	float: right;
+}
+
+.digits {
+	text-align: center;
+	font-family: 'B612 Mono', monospace;
+	font-size: 21px;
+	word-spacing: 12px;
+}
+
+.name {
+	float: left;
+	padding-top: 10px;
+	margin: 10px;
+	text-transform: uppercase;
+	font-family: 'B612 Mono', monospace;
+	font-size: 15px;
+}
+
+.valid-text {
+	margin: 15px;
+	text-transform: uppercase;
+	font-family: 'B612 Mono', monospace;
+	font-size: 10px;
+}
+
+.valid-text d {
+	font-size: 13px;
+}
+
+.centered {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -2%);
+}
+</style>
+
+<body>
+	<div class="header">
+		<nav>
+			<a href="" class="logo"><img src="../static/external-credit-card-fintech-wanicon-lineal-color-wanicon.png" height="35" \> Credit Card Fraud Detection</a>
+			<div class="nav-links">
+				<ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="/cc">Detect</a></li>
+					<li><a href="/ledger">Blockchain Ledger</a></li>
+					<li><a href="/datasets">Download</a></li>
+					<li><a href="/about">About</a></li>
+					<li><a href="https://ccfrauddetection.blogspot.com/2021/01/credit-card-fraud-detection-system.html" target="_blank">Blogs</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="row">
+			<div class="left-col"> </div>
+			<section>
+				<br>
+				<br>
+				<br>
+				<div class="right-col">
+					<div class="card centered"> <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Mastercard_logo.svg" height="60" \> <img class="chip" align="left" src="../static/sim-card-chip.png" height="45" \>
+						<p class="digits"> </p>
+						<h3 style="text-align:center;padding:10px;"><a href="/cc">Credit Card Fraud Detection</a></h3> </div>
+				</div>
+			</section>
+		</div>
+	</div>
+	</div>
+</body>
+
+</html>
